@@ -2,7 +2,7 @@
 declare namespace ext.runtime {
 
   /** Platform information. */
-  export interface RuntimePlatformInfo {
+  export interface PlatformInfo {
     /** Operating system. */
     os: 'mac' | 'windows' | 'linux'
     /** CPU architecture. */
@@ -10,7 +10,7 @@ declare namespace ext.runtime {
   }
 
   /** Extension update information. */
-  export interface RuntimeExtensionUpdate {
+  export interface ExtensionUpdate {
     /** Version string. */
     version: string
     /** User friendly version name if available. */
@@ -18,15 +18,15 @@ declare namespace ext.runtime {
   }
 
   /** Update check return value. */
-  export interface RuntimeUpdateCheck {
+  export interface UpdateCheck {
     /** Status of the update check. */
     status: 'no_update' | 'update_available'
     /** Update information. */
-    details: RuntimeExtensionUpdate | undefined
+    details: ExtensionUpdate | undefined
   }
 
   /** Module state. */
-  export interface RuntimeModuleState {
+  export interface ModuleState {
     /** Module ID. */
     id: string
     /** Module install path if available. */
@@ -34,7 +34,7 @@ declare namespace ext.runtime {
   }
 
   /** Event handler. */
-  export interface ExtRuntimeHandler<Listener> {
+  interface EventHandler<Listener> {
     /**
      * Register listener.
      * @param listener Listener to invoke.
@@ -51,13 +51,13 @@ declare namespace ext.runtime {
   export function getManifest(): Promise<any>
 
   /** Get platform information. */
-  export function getPlatformInfo(): Promise<RuntimePlatformInfo>
+  export function getPlatformInfo(): Promise<PlatformInfo>
 
   /** Reload extension. */
   export function reload(): Promise<void>
 
   /** Check for extension updates. */
-  export function requestUpdateCheck(): Promise<RuntimeUpdateCheck>
+  export function requestUpdateCheck(): Promise<UpdateCheck>
 
   /** Get all loaded module ID's. */
   export function getModules(): Promise<string[]>
@@ -66,33 +66,33 @@ declare namespace ext.runtime {
   export function getPermissions(): Promise<{[module: string]: string[]}>
   
   /** Called when the extension is installed. */
-  export const onInstall: ExtRuntimeHandler<() => void>
+  export const onInstall: EventHandler<() => void>
 
   /** Called before the extension is uninstalled. */
-  export const onUninstall: ExtRuntimeHandler<() => void>
+  export const onUninstall: EventHandler<() => void>
 
   /** Called when the extension is enabled. */
-  export const onEnable: ExtRuntimeHandler<() => void>
+  export const onEnable: EventHandler<() => void>
 
   /** Called when the extension is disabled. */
-  export const onDisable: ExtRuntimeHandler<() => void>
+  export const onDisable: EventHandler<() => void>
 
   /** Called when an extension update is available. */
-  export const onUpdateAvailable: ExtRuntimeHandler<(details: RuntimeExtensionUpdate) => void>
+  export const onUpdateAvailable: EventHandler<(details: ExtensionUpdate) => void>
 
   /** Called when a permission has been granted. */
-  export const onPermissionGrant: ExtRuntimeHandler<(moduleID: string, permissionKey: string) => void>
+  export const onPermissionGrant: EventHandler<(moduleID: string, permissionKey: string) => void>
 
   /** Called when a permission has been revoked. */
-  export const onPermissionRevoke: ExtRuntimeHandler<(moduleID: string, permissionKey: string) => void>
+  export const onPermissionRevoke: EventHandler<(moduleID: string, permissionKey: string) => void>
   
   /** Called when a module has been loaded. */
-  export const onModuleLoad: ExtRuntimeHandler<(module: RuntimeModuleState) => void>
+  export const onModuleLoad: EventHandler<(module: ModuleState) => void>
 
   /** Called when a module has been unloaded. */
-  export const onModuleUnload: ExtRuntimeHandler<(module: RuntimeModuleState) => void>
+  export const onModuleUnload: EventHandler<(module: ModuleState) => void>
 
   /** Called when an extension is clicked in the dashboard. */
-  export const onExtensionClick: ExtRuntimeHandler<() => void>
+  export const onExtensionClick: EventHandler<() => void>
 
 }
