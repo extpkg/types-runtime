@@ -6,10 +6,10 @@
   "license": "MIT",
   "keywords": ["types", "ext"],
   "repository": {
-	"type": "git",
-	"url": "https://github.com/extpkg/types-runtime.git"
+    "type": "git",
+    "url": "https://github.com/extpkg/types-runtime.git"
   },
   "publishConfig": {
-	"access": "public"
+    "access": "public"
   }
 }
