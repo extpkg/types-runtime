@@ -17,6 +17,32 @@ declare namespace ext.runtime {
     details: EventUpdate | undefined
   }
 
+  /** Module information. */
+  export interface ModuleInfo {
+    /** Module name. */
+    name: string
+    /** Module description. */
+    description: string
+    /** Requested module verison. */
+    version?: string
+    /** True if module is optional. */
+    optional: boolean
+    /** True if module is loaded. */
+    loaded: boolean
+  }
+
+  /** Permission information */
+  export interface PermissionInfo {
+    /** Permission description. */
+    description: string
+    /** True if permission is optional. */
+    optional: boolean
+    /** True if permission is globally revoked. */
+    revoked: boolean
+    /** True if permission is granted. */
+    granted: boolean
+  }
+
   /** Update event. */
   export interface EventUpdate {
     /** Version string. */
@@ -89,13 +115,13 @@ declare namespace ext.runtime {
    * Get all loaded module ID's.
    * @returns The promise resolves with an array of all loaded module ID's.
    */
-  export function getModules(): Promise<string[]>
+  export function getModules(): Promise<ModuleInfo[]>
 
   /**
    * Get all granted permissions for all modules.
    * @returns The promise resolves with an object that contains a granted permission array for each module.
    */
-  export function getPermissions(): Promise<{[module: string]: string[]}>
+  export function getPermissions(): Promise<{[module: string]: {[permission: string]: PermissionInfo}}>
 
   /**
    * Send a message to an extension.
