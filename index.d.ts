@@ -4,7 +4,7 @@ declare namespace ext.runtime {
   /** Platform information. */
   export interface PlatformInfo {
     /** Operating system. */
-    os: 'mac' | 'windows' | 'linux'
+    os: 'mac' | 'win' | 'linux'
     /** CPU architecture. */
     arch: 'arm' | 'arm64' | 'x86-32' | 'x86-64'
   }
